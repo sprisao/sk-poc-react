@@ -75,7 +75,7 @@ export function AccountTable<TData, TValue>({
                         </TableRow>
                     ))
                 ) : (
-                    <TableRow>
+                    <TableRow className="h-[110px]">
                         <TableCell className="text-center border" colSpan={columns.length}>
                             No data
                         </TableCell>
