@@ -1,6 +1,16 @@
 import cn from 'classnames';
+import { ChangeEvent } from 'react';
 
-export default function InputBox({className, type, ...props}: {className?: string, type?: string, props?: any}) {
+interface InputBoxProps {
+    className?: string;
+    type?: string;
+    placeholder?: string;
+    value?: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    // add other props if needed
+}
+
+export default function InputBox({className, type, placeholder, value, onChange, ...props}: InputBoxProps) {
     return (
         <input
             className={cn(
@@ -8,6 +18,9 @@ export default function InputBox({className, type, ...props}: {className?: strin
                 className
             )}
             type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
             {...props}
         />
     );
