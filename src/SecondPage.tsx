@@ -15,6 +15,7 @@ import InputBox from "./components/ui/inputBox";
 
 import profilePic from './assets/images/user.png'
 import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from "./components/ui/dropdown-menu";
+import Accordion from "./components/ui/accordion";
 
 
 // export default function SecondPage() {
@@ -65,8 +66,14 @@ export default function SecondPage() {
     const [imageSrc, setImageSrc] = useState(''); // Adjusted default image path
     const fileInputRef = useRef(null);
 
-const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if(event.target.files === null) return;
+    const changeLanguage = (lang: string) => {
+        i18n.changeLanguage(lang).then(r =>
+            console.log(r)
+        );
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files === null) return;
         const file = event.target.files[0];
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
@@ -80,9 +87,9 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault()
             setIsMenuActive(!isMenuActive)
-           if (dialogTriggerRef.current) {
-    (dialogTriggerRef.current as HTMLButtonElement).click()
-}
+            if (dialogTriggerRef.current) {
+                (dialogTriggerRef.current as HTMLButtonElement).click()
+            }
         }
     }
 
@@ -123,8 +130,14 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56">
-                                    <DropdownMenuLabel>영어</DropdownMenuLabel>
-                                    <DropdownMenuLabel>한국어</DropdownMenuLabel>
+                                <DropdownMenuLabel>
+                                    <Button className="w-full" onClick={() => changeLanguage("en")}>한국어
+                                    </Button>
+                                </DropdownMenuLabel>
+                                <DropdownMenuLabel>
+                                    <Button className="w-full" onClick={() => changeLanguage("ko")}>영어
+                                    </Button>
+                                </DropdownMenuLabel>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
@@ -134,7 +147,7 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                                 {imageSrc === '' ? (
                                     <img src={profilePic} alt="Image" style={{width: '50%'}}/>
                                 ) : (
-                                    <img src={imageSrc} alt="Image" />
+                                    <img src={imageSrc} alt="Image"/>
                                 )}
                             </div>
                         </div>
@@ -158,7 +171,7 @@ const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                 </div>
                 <ImageSlider/>
                 <div className="p-5 border bg-gray-50">
-                    {/*<Accordion lng={lng}/>*/}
+                    <Accordion/>
                 </div>
             </div>
             <DialogContent>

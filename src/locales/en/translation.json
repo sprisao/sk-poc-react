@@ -1,14 +1,8 @@
 {
-  "header": {
-    "mypage": "My page",
-    "logout": "Sign Out",
-    "login": "Sign In",
-    "register": "Sign Up",
-    "language": "Languages",
-    "help": "Help"
-  },
-  "nav": {
-    "dashboard": "Dashboard",
-    "shopping-mall": "Shopping Mall"
-  }
+  "firstAccordionTitle": "AI Company that Brings Benefits to Customers through Technology and Service Innovation",
+  "firstAccordionContent": "SK Telecom is shaping into an AI Company by combining AI to a wide range of connectivity technologies\nrealized based on telecommunications.\n\nSK Telecom is securing new growth drivers by redefining our core businesses with AI,\nwhile innovating customer relations through AI services equipped with new technologies and content.\n\nThrough these efforts, SK Telecom aims to become the leading AI Company in Korea.",
+  "secondAccordionTitle": "Business Areas",
+  "secondAccordionContent": "SK Telecom has been leading the global mobile industry by achieving the world’s first commercialization of CDMA in 1996,\nLTE-A in 2013 and 5G in 2019.\nSK Telecom will continue to strengthen its competitiveness by providing customers with highly personalized services based on AI,\nwhile further advancing fixed and mobile network infrastructure.",
+  "thirdAccordionTitle": "[2020s] Evolving into a Big Tech Company Based on Unwavering No.1 Telecommunications Capabilities",
+  "thirdAccordionContent": "In the 2020s, SK Telecom has been securing and nurturing various future growth engines such as media, mobility, commerce, and convergence security beyond the undisputed No.1 telecommunications.\n\nIn April 2020, SK Telecom established a corporation by merging SK Broadband and T-Broad. Through the corporation, it has grown a comprehensive media business covering IPTV, cable TV, and OTT (wavve), attracting 10 million subscribers.\n\nIn December 2020, the company split off its Mobility Business Unit to establish T Map Mobility, and in April 2021, it set up UT, a joint venture with Uber, a global mobility enterprise. In March 2021, in the security area, the company integrated SK Shieldus (formerly ADT Caps) and SK Infosec to accelerate its growth as a convergence security provider that combines physical security and information security.\nIn August 2021, in the commerce area, it incorporated the Amazon Global Store into 11st, where its customers can directly purchase Amazon products.\n\nOn November 1, 2021, SK Telecom was separated into SK Telecom (surviving company), an AI and Digital Infrastructure enterprise, and SK Square (new company), an investment firm specializing in semiconductors and innovative Information and Communication Technology (ICT) through a spin-off.\nSK Telecom plans to increase its investment efficiency and business competitiveness to evolve into a big tech company beyond telecommunications."
 }
