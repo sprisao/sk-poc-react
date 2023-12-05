@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import i18n from "i18next";
 
 import {Button} from "./components/ui/button";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from "@radix-ui/react-dropdown-menu";
 import {HiOutlineGlobeAlt} from "react-icons/hi2";
 import {Dialog, DialogContent, DialogHeader, DialogTrigger} from "./components/ui/dialog";
 import MonthlySignUpChart from "./components/charts/MonthlySignUpChart";
@@ -15,6 +14,7 @@ import ImageSlider from "./components/ui/ImageSlider";
 import InputBox from "./components/ui/inputBox";
 
 import profilePic from './assets/images/user.png'
+import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from "./components/ui/dropdown-menu";
 
 
 // export default function SecondPage() {
