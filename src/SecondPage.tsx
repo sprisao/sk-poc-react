@@ -108,7 +108,7 @@ export default function SecondPage() {
 
     return (
         <Dialog>
-            <div className="px-5 space-y-4">
+            <div className="px-5 space-y-4 pt-3">
                 <div className="grid grid-cols-[250px_auto] gap-3">
                     <div className="col-span-3 col-start-2 flex flex-row justify-between">
                         <div className="flex flex-row space-x-2">
