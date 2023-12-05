@@ -3,6 +3,8 @@ import { useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import i18n from "i18next";
 
+import {Button} from "./components/ui/button";
+
 export default function SecondPage() {
     const {t} = useTranslation();
     const languageRef = useRef<null | HTMLDivElement>(null);
@@ -28,9 +30,9 @@ export default function SecondPage() {
                             {t(`header.language`)}
                             {isLanguageMenuOpen && (
                                 <ul className="absolute bg-white text-black mt-2 p-2 rounded shadow-lg">
-                                    <li className="cursor-pointer"
+                                    <Button className="cursor-pointer"
                                         onClick={() => changeLanguage("ko")}>한국어
-                                    </li>
+                                    </Button>
                                     <li className="cursor-pointer"
                                         onClick={() => changeLanguage("en")}>English
                                     </li>
