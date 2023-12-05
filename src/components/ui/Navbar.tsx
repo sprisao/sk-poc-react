@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 export default function NavBar() {
     return (
-        <nav className="flex flex-row justify-end mx-4 pb-3">
+        <nav className="flex flex-row justify-end mx-4 pt-3">
             <ul className="flex gap-2">
                 <li>
                     <Link to="/"
@@ -18,7 +18,7 @@ export default function NavBar() {
                     </Link>
                 </li>
                 <li className="ml-auto">
-                    <Link to="/about"
+                    <Link to="/second"
                           className=" hover:underline">
                         <Button variant="outline" className="flex flex-row justify-center items-center space-x-1">
                             <HiChartPie fontSize={20}/>
