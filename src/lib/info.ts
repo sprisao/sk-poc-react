@@ -1,7 +1,7 @@
 import {CustomerConsultationInfo} from "./types";
 
 export async function getInfoData(): Promise<CustomerConsultationInfo[]> {
-    const serverUrl = 'http://localhost:8080/api/sk/GET_CSR_CNSL_INFO';
+    const serverUrl = 'http://3.35.140.144/api/sk/GET_CSR_CNSL_INFO';
 
     const response = await fetch(serverUrl,{
         cache: 'no-cache',
