@@ -147,7 +147,8 @@ export default function SecondPage() {
                                 {imageSrc === '' ? (
                                     <img src={profilePic} alt="Image" style={{width: '50%'}}/>
                                 ) : (
-                                    <img src={imageSrc} alt="Image"/>
+                                    <img src={imageSrc} alt="Image"
+                                         style={{objectFit: "cover", width: '100%', height: '100%'}}/>
                                 )}
                             </div>
                         </div>
