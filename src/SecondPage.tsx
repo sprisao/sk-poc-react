@@ -4,10 +4,9 @@ import {useNavigate} from "react-router-dom";
 import i18n from "i18next";
 
 import {Button} from "./components/ui/button";
-import {Dialog, DialogContent, DialogTrigger} from "@radix-ui/react-dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from "@radix-ui/react-dropdown-menu";
 import {HiOutlineGlobeAlt} from "react-icons/hi2";
-import {DialogHeader} from "./components/ui/dialog";
+import {Dialog, DialogContent, DialogHeader, DialogTrigger} from "./components/ui/dialog";
 import MonthlySignUpChart from "./components/charts/MonthlySignUpChart";
 import RegionPieChart from "./components/charts/RegionPieChart";
 import MonthlySignUpLineChart from "./components/charts/MonthlySignUpLineChart";
