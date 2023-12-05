@@ -23,10 +23,10 @@ export const columns: ColumnDef<BillingInfoData, string>[] = [
             <div className="text-center">{row.getValue("unpaidBalance")}</div>
     },
     {
-        id: 'serviceNumber',
-        accessorKey: 'serviceNumber',
+        id: 'serviceCount',
+        accessorKey: 'serviceCount',
         header: '서비스 수', cell: ({row}) =>
-            <div className="text-center">{row.getValue("serviceNumber")}</div>
+            <div className="text-center">{row.getValue("serviceCount")}</div>
     },
 ];
 

@@ -20,6 +20,12 @@ import {
 import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {HiMagnifyingGlass} from "react-icons/hi2";
 import Info from "./Info";
+import {getServiceAccountSearchData} from "../../lib/account";
+import {getConsultationDetailData} from "../../lib/detail";
+import {getBillingInfoData} from "../../lib/billing";
+import {getHistoryData} from "../../lib/history";
+import {CustomerConsultationDetail} from "../../lib/types";
+import {getInfoData} from "../../lib/info";
 
 const Search = () => {
 
@@ -33,10 +39,9 @@ const Search = () => {
 
     const [getCustomerInfoData, setGetCustomerInfoData] = useState(false)
     const [customerInfoData, setCustomerInfoData] = useState([])
-    const [detailData, setDetailData] = useState(null)
+    const [detailData, setDetailData] = useState<CustomerConsultationDetail | null>(null)
     const [billingData, setBillingData] = useState([])
     const [historyData, setHistoryData] = useState([])
-    const [getDetailData, setGetDetailData] = useState(false)
 
     const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -44,9 +49,8 @@ const Search = () => {
         const controller = new AbortController();
         if (!startSearch) return
         (async () => {
-            const response = await fetch('/api/search')
-            const data = await response.json()
-            setSearchResult(data)
+            const data = await getServiceAccountSearchData()
+            setSearchResult(data as never[])
             console.log(data)
         })()
         setStartSearch(false)
@@ -59,18 +63,16 @@ const Search = () => {
         const controller = new AbortController();
         if (!getCustomerInfoData) return
         (async () => {
-            const response = await fetch('/api/consultation/info')
-            const detailResponse = await fetch('/api/consultation/detail')
-            const billingResponse = await fetch('/api/consultation/billing')
-            const historyResponse = await fetch('/api/consultation/history')
-            const data = await response.json()
-            const detailData = await detailResponse.json()
-            const billingData = await billingResponse.json()
-            const historyData = await historyResponse.json()
-            setCustomerInfoData(data)
-            setDetailData(detailData)
-            setBillingData(billingData)
-            setHistoryData(historyData)
+            const data = await getInfoData()
+            const detailData = await getConsultationDetailData()
+            const billingData = await getBillingInfoData()
+            const historyData = await getHistoryData()
+            setCustomerInfoData(data as never[])
+
+            setDetailData(detailData as CustomerConsultationDetail | null)
+
+            setBillingData(billingData as never[])
+            setHistoryData(historyData as never[])
             console.log(data)
         })()
         setGetCustomerInfoData(false)
