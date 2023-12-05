@@ -21,10 +21,10 @@ export default function SecondPage() {
             <div className="flex justify-between">
                 <div className="flex space-x-4">
                     <nav className="flex space-x-4">
-                        <div className="text-white cursor-pointer"
-                             onClick={() => navigate("/user/signin")}>{t(`header.login`)}</div>
-                        <div className="text-white cursor-pointer"
-                             onClick={() => navigate("/user/register")}>{t(`header.register`)}</div>
+                        <Button className="text-white cursor-pointer"
+                             onClick={() => navigate("/user/signin")}>{t(`header.login`)}</Button>
+                        <Button className="text-white cursor-pointer"
+                             onClick={() => navigate("/user/register")}>{t(`header.register`)}</Button>
                         <div ref={languageRef} className="text-white cursor-pointer"
                              onClick={() => setLanguageMenuOpen(prev => !prev)}>
                             {t(`header.language`)}
