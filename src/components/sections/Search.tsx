@@ -53,33 +53,59 @@ const Search = () => {
             setSearchResult(data as never[])
             console.log(data)
         })()
-        setStartSearch(false)
+       setStartSearch(false)
         return () => {
             controller.abort()
         }
     }, [startSearch]);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        if (!getCustomerInfoData) return
-        (async () => {
-            const data = await getInfoData()
-            const detailData = await getConsultationDetailData()
-            const billingData = await getBillingInfoData()
-            const historyData = await getHistoryData()
-            setCustomerInfoData(data as never[])
+  useEffect(() => {
+    const controller = new AbortController();
+    if (!getCustomerInfoData) return
+    (async () => {
+        const data = await getInfoData()
+        setCustomerInfoData(data as never[])
+    })()
+    return () => {
+        controller.abort()
+    }
+}, [getCustomerInfoData]);
 
-            setDetailData(detailData as CustomerConsultationDetail | null)
+useEffect(() => {
+    const controller = new AbortController();
+    if (!getCustomerInfoData) return
+    (async () => {
+        const detailData = await getConsultationDetailData()
+        setDetailData(detailData as CustomerConsultationDetail | null)
+    })()
+    return () => {
+        controller.abort()
+    }
+}, [getCustomerInfoData]);
 
-            setBillingData(billingData as never[])
-            setHistoryData(historyData as never[])
-            console.log(data)
-        })()
-        setGetCustomerInfoData(false)
-        return () => {
-            controller.abort()
-        }
-    }, [getCustomerInfoData]);
+useEffect(() => {
+    const controller = new AbortController();
+    if (!getCustomerInfoData) return
+    (async () => {
+        const billingData = await getBillingInfoData()
+        setBillingData(billingData as never[])
+    })()
+    return () => {
+        controller.abort()
+    }
+}, [getCustomerInfoData]);
+
+useEffect(() => {
+    const controller = new AbortController();
+    if (!getCustomerInfoData) return
+    (async () => {
+        const historyData = await getHistoryData()
+        setHistoryData(historyData as never[])
+    })()
+    return () => {
+        controller.abort()
+    }
+}, [getCustomerInfoData]);
 
     function searchUser() {
         console.log(`searchUser: ${selectedServiceNumber}`)
