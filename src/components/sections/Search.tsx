@@ -37,87 +37,97 @@ const Search = () => {
     const [startSearch, setStartSearch] = useState(false)
     const [SearchResult, setSearchResult] = useState([])
 
-    const [getCustomerInfoData, setGetCustomerInfoData] = useState(false)
     const [customerInfoData, setCustomerInfoData] = useState([])
     const [detailData, setDetailData] = useState<CustomerConsultationDetail | null>(null)
     const [billingData, setBillingData] = useState([])
     const [historyData, setHistoryData] = useState([])
 
     const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const [getAccountData, setGetAccountData] = useState(false);
+    const [getInfoDataState, setGetInfoDataState] = useState(false);
+    const [getDetailDataState, setGetDetailDataState] = useState(false);
+    const [getBillingDataState, setGetBillingDataState] = useState(false);
+    const [getHistoryDataState, setGetHistoryDataState] = useState(false);
 
     useEffect(() => {
         const controller = new AbortController();
-        if (!startSearch) return
+        if (!getAccountData) return
         (async () => {
             const data = await getServiceAccountSearchData()
             setSearchResult(data as never[])
             console.log(data)
         })()
-       setStartSearch(false)
+        setGetAccountData(false)
         return () => {
             controller.abort()
         }
-    }, [startSearch]);
+    }, [getAccountData]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    if (!getCustomerInfoData) return
-    (async () => {
-        const data = await getInfoData()
-        setCustomerInfoData(data as never[])
-    })()
-    return () => {
-        controller.abort()
-    }
-}, [getCustomerInfoData]);
+    useEffect(() => {
+        const controller = new AbortController();
+        if (!getInfoDataState) return
+        (async () => {
+            const data = await getInfoData()
+            setCustomerInfoData(data as never[])
+        })()
+        setGetInfoDataState(false)
+        return () => {
+            controller.abort()
+        }
+    }, [getInfoDataState]);
 
-useEffect(() => {
-    const controller = new AbortController();
-    if (!getCustomerInfoData) return
-    (async () => {
-        const detailData = await getConsultationDetailData()
-        setDetailData(detailData as CustomerConsultationDetail | null)
-    })()
-    return () => {
-        controller.abort()
-    }
-}, [getCustomerInfoData]);
+    useEffect(() => {
+        const controller = new AbortController();
+        if (!getDetailDataState) return
+        (async () => {
+            const detailData = await getConsultationDetailData()
+            setDetailData(detailData as CustomerConsultationDetail | null)
+        })()
+        setGetDetailDataState(false)
+        return () => {
+            controller.abort()
+        }
+    }, [getDetailDataState]);
 
-useEffect(() => {
-    const controller = new AbortController();
-    if (!getCustomerInfoData) return
-    (async () => {
-        const billingData = await getBillingInfoData()
-        setBillingData(billingData as never[])
-    })()
-    return () => {
-        controller.abort()
-    }
-}, [getCustomerInfoData]);
+    useEffect(() => {
+        const controller = new AbortController();
+        if (!getBillingDataState) return
+        (async () => {
+            const billingData = await getBillingInfoData()
+            setBillingData(billingData as never[])
+        })()
+        setGetBillingDataState(false)
+        return () => {
+            controller.abort()
+        }
+    }, [getBillingDataState]);
 
-useEffect(() => {
-    const controller = new AbortController();
-    if (!getCustomerInfoData) return
-    (async () => {
-        const historyData = await getHistoryData()
-        setHistoryData(historyData as never[])
-    })()
-    setGetCustomerInfoData(false)
-    return () => {
-        controller.abort()
-    }
-}, [getCustomerInfoData]);
+    useEffect(() => {
+        const controller = new AbortController();
+        if (!getHistoryDataState) return
+        (async () => {
+            const historyData = await getHistoryData()
+            setHistoryData(historyData as never[])
+        })()
+        setGetHistoryDataState(false)
+        return () => {
+            controller.abort()
+        }
+    }, [getHistoryDataState]);
 
     function searchUser() {
         console.log(`searchUser: ${selectedServiceNumber}`)
         const query = `010${midNumber}${lastNumber}`
-        setStartSearch(true)
+        setGetAccountData(true)
         console.log(`searchUser: ${query}`)
     }
 
     /*todo: 검색결과에 표시된 사용자를 클릭하고 적용하면 고객상담 정보에 데이터 표시*/
     function fetchData() {
-        setGetCustomerInfoData(true)
+        setGetInfoDataState(true)
+        setGetDetailDataState(true)
+        setGetBillingDataState(true)
+        setGetHistoryDataState(true)
         console.log(`fetchData: ${selectedServiceNumber}`)
     }
 
@@ -190,8 +200,8 @@ useEffect(() => {
                                 <Button className="h-7 px-2 rounded-sm py-1"
                                         onClick={
                                             () => {
-                                                if(midNumber === '4636' && lastNumber === '3519')
-                                                searchUser()
+                                                if (midNumber === '4636' && lastNumber === '3519')
+                                                    searchUser()
                                             }
                                         }
                                 ><HiMagnifyingGlass fontSize={23}/></Button>
@@ -221,8 +231,6 @@ useEffect(() => {
                     <div className="col-span-1">
                         <DialogTrigger asChild>
                             <Button className="w-28" onClick={() => {
-                                setMidNumber('');
-                                setLastNumber('');
                             }}>조회</Button>
                         </DialogTrigger>
                     </div>
@@ -261,8 +269,8 @@ useEffect(() => {
                             </div>
                             <Button className="w-16 h-8" onClick={() => {
                                 setSearchResult([])
-                                if(midNumber === '4636' && lastNumber === '3519')
-                                searchUser();
+                                if (midNumber === '4636' && lastNumber === '3519')
+                                    searchUser();
                             }}>검색</Button>
                         </div>
                     </div>
@@ -275,13 +283,16 @@ useEffect(() => {
                         <DialogClose asChild ref={closeButtonRef}>
                             <Button type="submit"
                                     onClick={() => {
+                                        setSearchResult([])
                                         setCustomerInfoData([])
                                         setHistoryData([])
                                         setDetailData(null)
                                         setBillingData([])
-                                        setGetCustomerInfoData(false)
+                                        setGetInfoDataState(true)
+                                        setGetDetailDataState(true)
+                                        setGetBillingDataState(true)
+                                        setGetHistoryDataState(true)
                                         fetchData()
-                                        setSearchResult([])
                                     }
                                     }
                             >적용</Button>
