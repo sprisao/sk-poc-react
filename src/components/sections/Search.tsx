@@ -102,6 +102,7 @@ useEffect(() => {
         const historyData = await getHistoryData()
         setHistoryData(historyData as never[])
     })()
+    setGetCustomerInfoData(false)
     return () => {
         controller.abort()
     }
@@ -127,9 +128,13 @@ useEffect(() => {
 
 
     const handleDoubleClick = async (selectedItem: SelectedItem) => {
-        await setSelectedServiceNumber(selectedItem.serviceNumber); // 예시로 'serviceNumber' 필드를 사용
-        console.log(`handleDoubleClick: ${selectedItem.serviceNumber}`)
+        /*기존 데이터 초기화 후 다시 fetch*/
         setCustomerInfoData([])
+        setHistoryData([])
+        setDetailData(null)
+        setBillingData([])
+        setSelectedServiceNumber(selectedItem.serviceNumber); // 예시로 'serviceNumber' 필드를 사용
+        console.log(`handleDoubleClick: ${selectedItem.serviceNumber}`)
         fetchData()
         closeButtonRef.current?.click();
     }
@@ -182,7 +187,14 @@ useEffect(() => {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setLastNumber(e.target.value)}
                             />
                             <DialogTrigger asChild>
-                                <Button className="h-7 px-2 rounded-sm py-1"><HiMagnifyingGlass fontSize={23}/></Button>
+                                <Button className="h-7 px-2 rounded-sm py-1"
+                                        onClick={
+                                            () => {
+                                                if(midNumber === '4636' && lastNumber === '3519')
+                                                searchUser()
+                                            }
+                                        }
+                                ><HiMagnifyingGlass fontSize={23}/></Button>
                             </DialogTrigger>
                         </div>
                     </div>
@@ -249,6 +261,7 @@ useEffect(() => {
                             </div>
                             <Button className="w-16 h-8" onClick={() => {
                                 setSearchResult([])
+                                if(midNumber === '4636' && lastNumber === '3519')
                                 searchUser();
                             }}>검색</Button>
                         </div>
@@ -263,6 +276,10 @@ useEffect(() => {
                             <Button type="submit"
                                     onClick={() => {
                                         setCustomerInfoData([])
+                                        setHistoryData([])
+                                        setDetailData(null)
+                                        setBillingData([])
+                                        setGetCustomerInfoData(false)
                                         fetchData()
                                         setSearchResult([])
                                     }
