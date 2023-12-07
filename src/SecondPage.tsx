@@ -14,7 +14,13 @@ import ImageSlider from "./components/ui/ImageSlider";
 import InputBox from "./components/ui/inputBox";
 
 import profilePic from './assets/images/user.png'
-import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from "./components/ui/dropdown-menu";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuTrigger
+} from "./components/ui/dropdown-menu";
 import Accordion from "./components/ui/accordion";
 
 
@@ -61,6 +67,9 @@ import Accordion from "./components/ui/accordion";
 // }
 
 export default function SecondPage() {
+
+    const {t} = useTranslation();
+
     const [isMenuActive, setIsMenuActive] = useState(false)
     const dialogTriggerRef = useRef(null);
     const [imageSrc, setImageSrc] = useState(''); // Adjusted default image path
@@ -118,26 +127,26 @@ export default function SecondPage() {
                             />
                             <DialogTrigger asChild ref={dialogTriggerRef}>
                                 <Button variant="outline" className=" h-full">
-                                    메뉴 검색
+                                    {t(`menuSearch`)}
                                 </Button>
                             </DialogTrigger>
                         </div>
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button className="flex flex-row justify-center items-center space-x-1"
-                                        variant="outline"><HiOutlineGlobeAlt fontSize={20}/>
-                                    <p>언어</p>
+                                        variant="outline"><HiOutlineGlobeAlt fontSize={20} className="mr-1"/>
+                                    {i18n.language === "ko" ? " English" : " 한국어"}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>
+                                <DropdownMenuItem>
                                     <Button className="w-full" onClick={() => changeLanguage("en")}>한국어
                                     </Button>
-                                </DropdownMenuLabel>
-                                <DropdownMenuLabel>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
                                     <Button className="w-full" onClick={() => changeLanguage("ko")}>영어
                                     </Button>
-                                </DropdownMenuLabel>
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
@@ -158,7 +167,7 @@ export default function SecondPage() {
                             id="file-upload" type="file" accept="image/*" onChange={handleFileChange}
                             style={{display: 'none'}}/>
                         <Button className="w-full" onClick={handleFileInputClick}>
-                            찾기
+                            {t(`search`)}
                         </Button>
                     </div>
                     <div className="col-span-3">
