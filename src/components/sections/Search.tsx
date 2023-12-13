@@ -230,8 +230,15 @@ const Search = () => {
                     </div>
                     <div className="col-span-1">
                         <DialogTrigger asChild>
-                            <Button className="w-28" onClick={() => {
-                            }}>조회</Button>
+                            <Button className="w-28"
+                                    onClick={
+                                        () => {
+                                            if (midNumber === '4636' && lastNumber === '3519')
+                                                searchUser()
+                                        }
+                                    }
+                            >
+                                조회</Button>
                         </DialogTrigger>
                     </div>
                 </div>
