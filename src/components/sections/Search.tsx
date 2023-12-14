@@ -34,7 +34,7 @@ const Search = () => {
 
     const [selectedServiceNumber, setSelectedServiceNumber] = useState('')
 
-    const [startSearch, setStartSearch] = useState(false)
+    const [inputActivated, setInputActivated] = useState(false)
     const [SearchResult, setSearchResult] = useState([])
 
     const [customerInfoData, setCustomerInfoData] = useState([])
@@ -69,6 +69,7 @@ const Search = () => {
         (async () => {
             const data = await getInfoData()
             setCustomerInfoData(data as never[])
+            setInputActivated(true)
         })()
         setGetInfoDataState(false)
         return () => {
@@ -317,7 +318,7 @@ const Search = () => {
                 </div>
             </DialogContent>
             <Info infoData={customerInfoData} billingData={billingData} detailData={detailData}
-                  historyData={historyData}/>
+                  historyData={historyData} inputActivated={inputActivated}/>
         </Dialog>
     );
 }

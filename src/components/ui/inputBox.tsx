@@ -7,20 +7,22 @@ interface InputBoxProps {
     placeholder?: string;
     value?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    // add other props if needed
+    disabled?: boolean;
 }
 
-export default function InputBox({className, type, placeholder, value, onChange, ...props}: InputBoxProps) {
+export default function InputBox({className, type, placeholder, value, onChange, disabled, ...props}: InputBoxProps) {
     return (
         <input
             className={cn(
-                "w-full flex flex-row px-2 bg-gray-50 border-2 h-7",
+                "w-full flex flex-row px-2  border-2 h-7",
+                                disabled ? "bg-gray-300" : "bg-pink-50",
                 className
             )}
             type={type}
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            disabled={disabled}
             {...props}
         />
     );

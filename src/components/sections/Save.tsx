@@ -5,7 +5,12 @@ import SelectBox from "../ui/selectBox";
 import InputBox from "../ui/inputBox";
 import TextAreaBox from "../ui/textAreaBox";
 
-const Save = () => {
+interface SaveProps {
+    inputActivated: boolean;
+}
+
+const Save = ({inputActivated}:SaveProps)  => {
+    console.log(`Save inputActivated: ${inputActivated}`)
     return (
         <div className="">
             <SectionTitle title="상담이력저장"/>
@@ -16,6 +21,7 @@ const Save = () => {
                         <div className="flex flex-row col-span-4 justify-between space-x-2">
                             <InputBox className=""
                                       type="text"
+                                      disabled={!inputActivated}
                             />
                             <CommonButton disable={true}>조회</CommonButton>
                         </div>
@@ -23,11 +29,14 @@ const Save = () => {
                     <div className="grid grid-cols-5 gap-2">
                         <p className="shrink-0 text-right">메모</p>
                         <TextAreaBox className="col-span-4 border-2 h-36 rounded-s"
+                                     disabled={!inputActivated}
                         />
                     </div>
                 </div>
                 <div className="">
-                    <TextAreaBox className="border-2 w-full h-full rounded-s"/>
+                    <TextAreaBox className="border-2 w-full h-full rounded-s"
+                                 disabled={!inputActivated}
+                    />
                 </div>
                 <div>
                 </div>
@@ -41,6 +50,7 @@ const Save = () => {
                     </div>
                     <InputBox className=""
                               type="text"
+                              disabled={!inputActivated}
                     />
                 </div>
                 <div className="flex flex-row text-sm space-x-1">
@@ -51,6 +61,7 @@ const Save = () => {
                     </div>
                     <InputBox className=""
                               type="text"
+                              disabled={!inputActivated}
                     />
                 </div>
                 <div className="flex flex-row text-sm space-x-1">
@@ -61,6 +72,7 @@ const Save = () => {
                     </div>
                     <SelectBox
                         className=""
+                        disabled={!inputActivated}
                     >
                         <option>In</option>
                         <option>Out</option>
@@ -80,6 +92,7 @@ const Save = () => {
                     </div>
                     <SelectBox
                         className=""
+                        disabled={!inputActivated}
                     >
                         <option>본인</option>
                         <option>실사용자</option>
