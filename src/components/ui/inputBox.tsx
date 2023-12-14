@@ -15,7 +15,7 @@ export default function InputBox({className, type, placeholder, value, onChange,
         <input
             className={cn(
                 "w-full flex flex-row px-2  border-2 h-7",
-                                disabled ? "bg-gray-300" : "bg-pink-50",
+                                disabled ? "bg-gray-300" : "bg-white",
                 className
             )}
             type={type}

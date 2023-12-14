@@ -12,7 +12,7 @@ export default function SelectBox({className, children, disabled}: InputBoxProps
         <select
             className={cn(
                 "w-full flex flex-row items-center px-1 bg-gray-50 border-2 h-7 text-sm pb-1",
-                disabled ? "bg-gray-300" : "bg-pink-50",
+                disabled ? "bg-gray-300" : "bg-white",
                 className
             )}
             disabled={disabled}
