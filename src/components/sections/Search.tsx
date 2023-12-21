@@ -201,7 +201,6 @@ const Search = () => {
                                 <Button className="h-7 px-2 rounded-sm py-1"
                                         onClick={
                                             () => {
-                                                if (midNumber === '4636' && lastNumber === '3519')
                                                     searchUser()
                                             }
                                         }
@@ -234,7 +233,6 @@ const Search = () => {
                             <Button className="w-28"
                                     onClick={
                                         () => {
-                                            if (midNumber === '4636' && lastNumber === '3519')
                                                 searchUser()
                                         }
                                     }
@@ -277,7 +275,6 @@ const Search = () => {
                             </div>
                             <Button className="w-16 h-8" onClick={() => {
                                 setSearchResult([])
-                                if (midNumber === '4636' && lastNumber === '3519')
                                     searchUser();
                             }}>검색</Button>
                         </div>
