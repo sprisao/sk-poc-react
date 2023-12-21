@@ -24,7 +24,7 @@ import {getServiceAccountSearchData} from "../../lib/account";
 import {getConsultationDetailData} from "../../lib/detail";
 import {getBillingInfoData} from "../../lib/billing";
 import {getHistoryData} from "../../lib/history";
-import {CustomerConsultationDetail} from "../../lib/types";
+import {CustomerConsultationDetail, ServiceAccountSearchData} from "../../lib/types";
 import {getInfoData} from "../../lib/info";
 
 const Search = () => {
@@ -35,7 +35,7 @@ const Search = () => {
     const [selectedServiceNumber, setSelectedServiceNumber] = useState('')
 
     const [inputActivated, setInputActivated] = useState(false)
-    const [SearchResult, setSearchResult] = useState([])
+    const [searchResult, setSearchResult] = useState<ServiceAccountSearchData[]>([])
 
     const [customerInfoData, setCustomerInfoData] = useState([])
     const [detailData, setDetailData] = useState<CustomerConsultationDetail | null>(null)
@@ -48,6 +48,9 @@ const Search = () => {
     const [getDetailDataState, setGetDetailDataState] = useState(false);
     const [getBillingDataState, setGetBillingDataState] = useState(false);
     const [getHistoryDataState, setGetHistoryDataState] = useState(false);
+
+    const [customerName, setCustomerName] = useState('')
+    const [customerSex, setCustomerSex] = useState('')
 
     useEffect(() => {
         const controller = new AbortController();
@@ -67,7 +70,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getInfoDataState) return
         (async () => {
-            const data = await getInfoData( `010${midNumber}${lastNumber}`)
+            const data = await getInfoData(`010${midNumber}${lastNumber}`)
             setCustomerInfoData(data as never[])
             setInputActivated(true)
         })()
@@ -81,7 +84,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getDetailDataState) return
         (async () => {
-            const detailData = await getConsultationDetailData( `010${midNumber}${lastNumber}`)
+            const detailData = await getConsultationDetailData(`010${midNumber}${lastNumber}`)
             setDetailData(detailData as CustomerConsultationDetail | null)
         })()
         setGetDetailDataState(false)
@@ -94,7 +97,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getBillingDataState) return
         (async () => {
-            const billingData = await getBillingInfoData( `010${midNumber}${lastNumber}` )
+            const billingData = await getBillingInfoData(`010${midNumber}${lastNumber}`)
             setBillingData(billingData as never[])
         })()
         setGetBillingDataState(false)
@@ -107,7 +110,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getHistoryDataState) return
         (async () => {
-            const historyData = await getHistoryData( `010${midNumber}${lastNumber}`)
+            const historyData = await getHistoryData(`010${midNumber}${lastNumber}`)
             setHistoryData(historyData as never[])
         })()
         setGetHistoryDataState(false)
@@ -140,6 +143,8 @@ const Search = () => {
 
     const handleDoubleClick = async (selectedItem: SelectedItem) => {
         /*기존 데이터 초기화 후 다시 fetch*/
+        setCustomerName(searchResult[0].customerName)
+        setCustomerSex(searchResult[0].sexCode)
         setCustomerInfoData([])
         setHistoryData([])
         setDetailData(null)
@@ -201,7 +206,7 @@ const Search = () => {
                                 <Button className="h-7 px-2 rounded-sm py-1"
                                         onClick={
                                             () => {
-                                                    searchUser()
+                                                searchUser()
                                             }
                                         }
                                 ><HiMagnifyingGlass fontSize={23}/></Button>
@@ -210,12 +215,16 @@ const Search = () => {
                     </div>
 
                     <div className=" flex-1 flex flex-row items-center space-x-3">
-                        <div className="flex flex-row space-x-1 items-center">
-                            <p className="shrink-0">고객명</p>
+                        <div className="flex flex-row items-center">
+                            <p className="shrink-0 mr-1">고객명</p>
                             <InputBox
-                                className="max-w-[100px] grow"
+                                className="max-w-[70px] grow"
                                 type="text"
-                                placeholder=""/>
+                                placeholder={customerName}/>
+                            <InputBox
+                                className="max-w-[35px]"
+                                type="text"
+                                placeholder={customerSex}/>
                         </div>
                         <div className="flex flex-row space-x-1 items-center">
                             <p className="shrink-0">생년/법인/사업자번호</p>
@@ -233,7 +242,7 @@ const Search = () => {
                             <Button className="w-28"
                                     onClick={
                                         () => {
-                                                searchUser()
+                                            searchUser()
                                         }
                                     }
                             >
@@ -275,19 +284,21 @@ const Search = () => {
                             </div>
                             <Button className="w-16 h-8" onClick={() => {
                                 setSearchResult([])
-                                    searchUser();
+                                searchUser();
                             }}>검색</Button>
                         </div>
                     </div>
                     <div className=" border rounded-sm overflow-clip mb-4 ">
                         <SectionTitle title="결과"/>
-                        <AccountTable columns={serviceAccountSearchColumns} data={SearchResult}
+                        <AccountTable columns={serviceAccountSearchColumns} data={searchResult}
                                       onSelect={handleSelect} onDoubleClick={handleDoubleClick}/>
                     </div>
                     <DialogFooter className="flex flex-row justify-center items-center space-x-1">
                         <DialogClose asChild ref={closeButtonRef}>
                             <Button type="submit"
                                     onClick={() => {
+                                        setCustomerName(searchResult[0].customerName)
+                                        setCustomerSex(searchResult[0].sexCode)
                                         setSearchResult([])
                                         setCustomerInfoData([])
                                         setHistoryData([])
@@ -307,6 +318,8 @@ const Search = () => {
                                 setMidNumber('');
                                 setLastNumber('');
                                 setSelectedServiceNumber('');
+                                setCustomerName('')
+                                setCustomerSex('')
                             }}>
                                 취소
                             </Button>
