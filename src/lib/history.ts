@@ -1,8 +1,9 @@
 import {CustomerConsultationHistory} from "./types";
-export async function getHistoryData(): Promise<CustomerConsultationHistory[]> {
-    const serverUrl = 'http://43.201.114.135/api/sk/GET_CSR_CNSL_HST_HISTORY';
 
-    const response = await fetch(serverUrl,{
+export async function getHistoryData(phoneNumber: string): Promise<CustomerConsultationHistory[]> {
+    const serverUrl = `http://43.201.114.135/api/sk/GET_CSR_CNSL_HST_HISTORY?phoneNumber=${phoneNumber}`;
+
+    const response = await fetch(serverUrl, {
         cache: 'no-cache',
         method: 'GET',
         headers: {

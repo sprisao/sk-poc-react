@@ -1,7 +1,8 @@
 import {ServiceAccountSearchData} from "./types";
 
-export async function getServiceAccountSearchData(): Promise<ServiceAccountSearchData[]> {
-    const serverUrl = 'http://43.201.114.135/api/sk/GET_CSR_SV_ACNT';
+export async function getServiceAccountSearchData(phoneNumber: string): Promise<ServiceAccountSearchData[]> {
+    // http://localhost:8080/api/sk/GET_CSR_SV_ACNT?phoneNumber=01046363632
+    const serverUrl = `http://43.201.114.135/api/sk/GET_CSR_SV_ACNT?phoneNumber=${phoneNumber}`;
 
     const response = await fetch(serverUrl,{
         cache: 'no-cache',

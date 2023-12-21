@@ -53,7 +53,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getAccountData) return
         (async () => {
-            const data = await getServiceAccountSearchData()
+            const data = await getServiceAccountSearchData(`010${midNumber}${lastNumber}`)
             setSearchResult(data as never[])
             console.log(data)
         })()
@@ -67,7 +67,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getInfoDataState) return
         (async () => {
-            const data = await getInfoData()
+            const data = await getInfoData( `010${midNumber}${lastNumber}`)
             setCustomerInfoData(data as never[])
             setInputActivated(true)
         })()
@@ -81,7 +81,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getDetailDataState) return
         (async () => {
-            const detailData = await getConsultationDetailData()
+            const detailData = await getConsultationDetailData( `010${midNumber}${lastNumber}`)
             setDetailData(detailData as CustomerConsultationDetail | null)
         })()
         setGetDetailDataState(false)
@@ -94,7 +94,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getBillingDataState) return
         (async () => {
-            const billingData = await getBillingInfoData()
+            const billingData = await getBillingInfoData( `010${midNumber}${lastNumber}` )
             setBillingData(billingData as never[])
         })()
         setGetBillingDataState(false)
@@ -107,7 +107,7 @@ const Search = () => {
         const controller = new AbortController();
         if (!getHistoryDataState) return
         (async () => {
-            const historyData = await getHistoryData()
+            const historyData = await getHistoryData( `010${midNumber}${lastNumber}`)
             setHistoryData(historyData as never[])
         })()
         setGetHistoryDataState(false)

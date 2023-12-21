@@ -1,7 +1,7 @@
 import {CustomerConsultationDetail} from "./types";
 
-export async function getConsultationDetailData(): Promise<CustomerConsultationDetail> {
-    const serverUrl = 'http://43.201.114.135/api/sk/GET_CSR_CNSL_HST';
+export async function getConsultationDetailData(phoneNumber: string): Promise<CustomerConsultationDetail> {
+    const serverUrl = `http://43.201.114.135/api/sk/GET_CSR_CNSL_HST?phoneNumber=${phoneNumber}`;
 
     const response = await fetch(serverUrl, {
         cache: 'no-cache',
